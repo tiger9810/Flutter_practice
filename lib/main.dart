@@ -1,82 +1,35 @@
+// material designを使用するためのパッケージのimport
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:english_words/english_words.dart';
 
-class MainPage extends StatefulWidget {
+// 返り値を返さないmain関数にrunApp関数を代入する
+// runApp関数は引数にWidgetを取り、それを画面に表示する機能を持つ
+// void main()のvoidとは、返り値がないことを示す。
+void main() => runApp(MyApp()); 
+
+// class MyAppはStatelessWidgetクラスを継承する
+// StatelessWidgetクラスは、状態を持たないWidgetを作成するためのクラス
+// 一度描画されたら変更されることがないWidgetを作成するためのクラス
+class MyApp extends StatelessWidget {
+
+  // @overrideは、継承元のクラスにあるメソッドを上書きすることを示す
   @override
-  _MainPageState createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  int _currentIndex = 0;
-  final _pageWidgets = [
-    PageWidget(color: Colors.white, title: 'fitness'),
-    PageWidget(color: Colors.blue, title: 'Chart'),
-    PageWidget(color: Colors.orange, title: 'Account'),
-    PageWidget(color: Color.fromARGB(255, 0, 255, 38), title: 'Goal'),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
+  
+ //Widget buildのbuildは、メソッド名でWidgetは返り値の型。
+ // buildメソッドは、Widgetを返すメソッドで、画面に表示する内容を記述する
+ // 引数にはBuildContextクラスのcontextという変数を取る
+ // contextは、Widgetがどの位置に描画されるかを示す情報を持つ
+  Widget build(BuildContext context) { 
     return MaterialApp(
-      title: 'Material App',
-      home: Scaffold(
-      appBar: AppBar(
-        title: Text('BottomNavigationBar'),
+      title: 'Welcome to Flutter',
+      home: Scaffold(appBar: AppBar(
+        title: Text('Welcome to Flutter'),
       ),
-      body: _pageWidgets.elementAt(_currentIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.fitness_center), label: 'fitness'),
-          BottomNavigationBarItem(icon: Icon(Icons.insert_chart_outlined_outlined), label: 'Chart'),
-          BottomNavigationBarItem(icon: Icon(Icons.account_circle_outlined), label: 'Account'),
-          BottomNavigationBarItem(icon: Icon(Icons.accessibility), label: 'Goal'),
-        ],
-        currentIndex: _currentIndex,
-        fixedColor: const Color.fromARGB(255, 0, 0, 0),
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
+      body: Center(
+        child: Text('Hello World'),
       ),
-    )
-    );
-    
-    
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
-}
-
-class PageWidget extends StatelessWidget {
-  final Color color;
-  final String title;
-
-  const PageWidget({
-    Key? key,
-    required this.color,
-    required this.title,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: color,
-      child: Center(
-        child: Text(
-          title,
-          style: TextStyle(
-            fontSize: 25,
-          ),
-        ),
-      ),
+      )
     );
   }
 }
 
-void main() {
-  runApp(MaterialApp(
-    home: MainPage(),
-  ));
-}
